@@ -9,6 +9,6 @@ const mainRoutes:Router=Router();
 
 mainRoutes.use('/user',authRouter)
 
-mainRoutes.use('/',jwtfromUser,roomRoutes);
+mainRoutes.use('/roomm',jwtfromUser,roomRoutes);
 
 export default mainRoutes

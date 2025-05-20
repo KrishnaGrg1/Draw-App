@@ -1,7 +1,7 @@
 import { Router } from "express";
 import authController from "../controller/authControllers";
 import validate from "../middlewares/validation";
-import authValidation from "../validations/authValidations";
+import {authValidation} from "@repo/common/types";
 
 
 const authRouter:Router=Router()

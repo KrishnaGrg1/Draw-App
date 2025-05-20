@@ -2,6 +2,7 @@ import { NextFunction, Response } from "express";
 import IRequest from "./IRequest";
 import ienv from "../env";
 import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "@repo/backend-common/config";
 const jwtfromUser = async (
   req: IRequest,
   res: Response,
@@ -16,8 +17,6 @@ const jwtfromUser = async (
       });
       return;
     }
-
-    const JWT_SECRET = ienv.JWT_SECRET as string;
     const decode = await jwt.verify(authtoken, JWT_SECRET);
     if (decode) {
       if (typeof decode === "string") {
@@ -28,10 +27,10 @@ const jwtfromUser = async (
       }
       req.userId = decode.userId;
       next();
-    }else{
-        res.status(400).json({
-            message:"You are not authorized"
-        })
+    } else {
+      res.status(400).json({
+        message: "You are not authorized"
+      });
     }
   } catch (e: any) {
     if (e instanceof Error) {
@@ -48,4 +47,4 @@ const jwtfromUser = async (
   }
 };
 
-export default jwtfromUser
+export default jwtfromUser;

@@ -1,9 +1,13 @@
 import { Router } from "express";
+import validate from "../middlewares/validation";
+import { roomValidations } from "@repo/common/types";
+import roomController from "../controller/roomController";
 
+const roomRoutes: Router = Router();
 
-
-
-const roomRoutes:Router=Router();
-
-roomRoutes.post('/room',)
-export default roomRoutes
+roomRoutes.post(
+  "/room",
+  validate(roomValidations.createRoom),
+  roomController.createRoom
+);
+export default roomRoutes;

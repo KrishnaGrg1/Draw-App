@@ -1,24 +1,33 @@
 import { Request, Response } from "express";
-import User from "../models/User";
+import prismaClient from "@repo/db/prismaClient";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import ienv from "../env";
+import { JWT_SECRET } from "@repo/backend-common/config";
 const register = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { username, password } = req.body;
+    const { email, password, name, photo } = req.body;
 
-    const existingUser = await User.findOne({ username });
+    const existingUser = await prismaClient.user.findFirst({
+      where: {
+        email
+      }
+    });
     if (existingUser) {
       res.status(400).json({
-        message: "User already found"
+        message: "Email already exist. Use another  email"
       });
       return;
     }
     const hashPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await User.create({
-      username,
-      password: hashPassword
+    const newUser = await prismaClient.user.create({
+      data: {
+        email,
+        password: hashPassword,
+        name,
+         ...(photo && { photo })
+      }
     });
 
     res.status(200).json({
@@ -43,9 +52,13 @@ const register = async (req: Request, res: Response): Promise<void> => {
 
 const login = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const existingUser = await User.findOne({ username });
+    const existingUser = await prismaClient.user.findFirst({
+      where: {
+        email
+      }
+    });
     if (!existingUser) {
       res.status(400).json({
         message: "User not found"
@@ -62,8 +75,8 @@ const login = async (req: Request, res: Response): Promise<void> => {
       });
       return;
     }
-    const userId = existingUser._id;
-    const JWT_SECRET = ienv.JWT_SECRET as string;
+    const userId = existingUser.id;
+
     const token = await jwt.sign(
       {
         userId
@@ -90,9 +103,8 @@ const login = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-
-const authController={
+const authController = {
   register,
   login
-}
-export default authController
+};
+export default authController;

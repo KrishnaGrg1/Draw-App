@@ -20,6 +20,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.15.0"
   },
+  "devDependencies":{
+    "@repo/common":"workspace:*",
+    "@repo/backend-common":"workspace:*",
+    "@repo/db":"workspace:*"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

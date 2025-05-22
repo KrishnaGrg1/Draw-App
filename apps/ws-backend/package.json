@@ -17,9 +17,10 @@
     "ws": "^8.18.2"
   },
   "devDependencies": {
-    "@types/ws": "^8.18.1",
     "@repo/backend-common": "workspace:*",
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "@types/ws": "^8.18.1",
+    "ts-node": "^10.9.2"
   },
   "keywords": [],
   "author": "",

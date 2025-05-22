@@ -15,7 +15,7 @@ const register = async (req: Request, res: Response): Promise<void> => {
     });
     if (existingUser) {
       res.status(400).json({
-        message: "Email already exist. Use another  email"
+        message: "Email already exist."
       });
       return;
     }

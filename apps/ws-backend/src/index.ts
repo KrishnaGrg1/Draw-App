@@ -19,6 +19,7 @@ wss.on("connection", (ws, request) => {
       ws.close(1008, "Missing token");
       return;
     }
+    
 
     const decoded = jwt.verify(token, JWT_SECRET) as JwtPayload;
 

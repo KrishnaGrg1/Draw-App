@@ -6,8 +6,9 @@ import roomController from "../controller/roomController";
 const roomRoutes: Router = Router();
 
 roomRoutes.post(
-  "/room",
+  "/",
   validate(roomValidations.createRoom),
   roomController.createRoom
 );
+roomRoutes.get("/chats/:roomId", roomController.getChat);
 export default roomRoutes;

@@ -43,8 +43,41 @@ const createRoom = async (req: IRequest, res: Response): Promise<void> => {
   }
 };
 
+const getChat=async(req:IRequest,res:Response):Promise<void>=>{
+  try{
+    const roomId=Number(req.params.roomId);
+    if(!roomId){
+      res.status(400).json({
+        message:"Room Id required"
+      })
+      return
+    }
+    const message=await prismaClient.chat.findMany({
+      where:{
+        roomId:roomId
+      },
+      orderBy:{
+        id:"desc"
+      },
+      take:50
+    })
+    res.status(200).json({
+      message
+    })
+  }catch(e:any){
+    if(e instanceof Error){
+      res.status(500).json({
+        message:e.message
+      })
+    }else{
+      res.status(500).json({
+        message:"Unexpected error occurred"
+      })
+    }
+  }
+}
 const roomController={
-    createRoom
+    createRoom,getChat
 }
 
 export default roomController

@@ -24,12 +24,15 @@ model Room {
   createdAt DateTime @default(now())
   adminId   Int
   admin     User     @relation(fields: [adminId], references: [id])
+  Chat      Chat[]
 }
 
 model Chat {
   id        Int      @id @default(autoincrement())
   message   String
   userId    Int
+  roomId    Int
+  Room      Room     @relation(fields: [roomId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }

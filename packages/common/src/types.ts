@@ -49,10 +49,6 @@ const roomValidations = {
         "any.required": "Room name is required",
         "string.min": "Room name must contain atleast 3 characters long",
         "string.max": "Room name must not exceed 50 characters long"
-      }),
-      adminId: Joi.number().required().messages({
-        "number.base": "Admin ID must be a number",
-        "any.required": "Admin ID is required"
       })
     })
   }

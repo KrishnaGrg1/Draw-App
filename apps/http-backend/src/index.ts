@@ -7,5 +7,5 @@ app.use(cors());
 
 app.use(mainRoutes);
 app.listen(8001,()=>{
-  console.log("Server started on port ",8081)
+  console.log("Server started on port ",8001)
 });

@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import prismaClient from "@repo/db/prismaClient";
+import {prismaClient}  from "@repo/db/prismaClient";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import ienv from "../env";
 import { JWT_SECRET } from "@repo/backend-common/config";
 const register = async (req: Request, res: Response): Promise<void> => {
   try {

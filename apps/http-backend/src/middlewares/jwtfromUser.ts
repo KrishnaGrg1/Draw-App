@@ -11,6 +11,7 @@ const jwtfromUser = async (
   try {
     const authHeader = req.header("Authorization");
     const authtoken = authHeader?.replace("Bearer", "");
+    console.log(authtoken)
     if (!authtoken) {
       res.status(400).json({
         message: "Auth token is required"
@@ -18,6 +19,7 @@ const jwtfromUser = async (
       return;
     }
     const decode = await jwt.verify(authtoken, JWT_SECRET);
+    console.log("Decode",decode)
     if (decode) {
       if (typeof decode === "string") {
         res.status(400).json({

@@ -11,4 +11,5 @@ roomRoutes.post(
   roomController.createRoom
 );
 roomRoutes.get("/chats/:roomId", roomController.getChat);
+roomRoutes.get('/:slug',roomController.joinRoom)
 export default roomRoutes;

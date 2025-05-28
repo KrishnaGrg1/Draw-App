@@ -17,7 +17,7 @@ id:string
     const message=await getChats(id)
 return (    
     <div>
-        <ChatRoomClient messages={message} id={id} />    
+        <ChatRoomClient messages={message} id={id}/>    
     </div>
 )
 }

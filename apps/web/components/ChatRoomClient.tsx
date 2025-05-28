@@ -36,11 +36,11 @@ export default function ChatRoomClient({
       socket.onmessage = (event) => {
         const parsedData = JSON.parse(event.data);
 
-        // if (parsedData.type === "init") {
-        //   const userId = Number(parsedData.userId);
-        //   setMyUserId(userId);
-        //   myUserIdRef.current = userId;
-        // }
+        if (parsedData.type === "init") {
+          const userId = Number(parsedData.userId);
+          setMyUserId(userId);
+          myUserIdRef.current = userId;
+        }
 
         if (parsedData.type === "chat") {
           setChats((prev) => [
